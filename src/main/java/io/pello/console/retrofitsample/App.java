@@ -3,8 +3,8 @@ package io.pello.console.retrofitsample;
 import java.util.Scanner;
 
 /**
- * Hello world!
- *
+ * Starter class
+ * @author PELLO_ALTADILL
  */
 public class App 
 {
