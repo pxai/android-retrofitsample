@@ -15,15 +15,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Manages interaction between user and api calls
  */
 public class ItemManager {
+	private String url;
 
 	private ItemApiClient itemApiClient; 
 	
 	/**
 	 * constructor, inits itemApiClient
 	 */
-	public ItemManager () {
+	public ItemManager (String url) {
+		this.url = url;
 		Retrofit retrofit = new Retrofit.Builder()
-			    .baseUrl("http://bizgen.co/")
+			    .baseUrl(this.url)
 			    .addConverterFactory(GsonConverterFactory.create())
 			    .build();	
 	
@@ -66,5 +68,57 @@ public class ItemManager {
 		return item;
 	}
 
+	/**
+	 * uses retrofit API client to create a new item
+	 * @param item
+	 * @return
+	 */
+	public String createItem(Item item) {
+		Call<String> itemApiCall = itemApiClient.create(item);
+		String result = "";
+		
+		try {
+			result = itemApiCall.execute().body();
+		} catch (IOException e) {
+			System.err.println("Error calling item API");
+		} 
+		
+		return result;
+	}
 
+	/**
+	 * uses retrofit API client to update an item
+	 * @param item
+	 * @return
+	 */
+	public String updateItem(Item item) {
+		Call<String> itemApiCall = itemApiClient.update(item);
+		String result = "";
+		
+		try {
+			result = itemApiCall.execute().body();
+		} catch (IOException e) {
+			System.err.println("Error calling item API");
+		} 
+		
+		return result;
+	}
+	
+	/**
+	 * uses retrofit API client to delete item by id
+	 * @param id
+	 * @return
+	 */
+	public String deleteItem(Long id) {
+		Call<String> itemApiCall = itemApiClient.delete(id);
+		String result = null;
+		
+		try {
+			result = itemApiCall.execute().body();
+		} catch (IOException e) {
+			System.err.println("Error calling item API");
+		} 
+		
+		return result;
+	}
 }

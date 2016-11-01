@@ -6,10 +6,13 @@ import java.util.Scanner;
 public class Main {
 	
 	public void start () {
-		ItemManager itemManager = new ItemManager();
+		// 
+		ItemManager itemManager = new ItemManager("http://bizgen.co/");
     	Scanner reader = new Scanner(System.in);
     	String option = "";
+    	String name = "";
     	Long id = 0l;
+    	Item item = null;
     	
     	do {
 	    
@@ -26,10 +29,29 @@ public class Main {
     			case "2":	
     						System.out.println("Please, enter an Id");
     						id = reader.nextLong();
-    						Item item = itemManager.getItem(id);
+    						item = itemManager.getItem(id);
     						System.out.println(item);
 							break;
-    			default:	
+    			case "3":	
+							System.out.println("Please, enter name");
+							name = reader.nextLine();
+							item = new Item(null, name, name, 1);
+							System.out.println(itemManager.createItem(item));
+							break;
+				case "4":	
+							System.out.println("Please, enter an Id");
+							id = reader.nextLong();
+							System.out.println("Please, enter updated name");
+							name = reader.nextLine();
+							item = new Item(id, name, name, 1);
+							System.out.println(itemManager.updateItem(item));
+							break;
+    			case "5":	
+							System.out.println("Please, enter an Id");
+							id = reader.nextLong();
+							System.out.println(itemManager.deleteItem(id));
+							break;
+				default:	
     						break;
     		}
     	} while (!option.equals("6"));	
@@ -45,7 +67,7 @@ public class Main {
 	    	"Choose an option",
 	    	"1. Select all items.",
 	    	"2. Select one item.",
-	    	"3. Insert new item.",
+	    	"3. Create new item.",
 	    	"4. Update one item.",
 	    	"5. Delete one item.",
 	    	"6. Exit."
