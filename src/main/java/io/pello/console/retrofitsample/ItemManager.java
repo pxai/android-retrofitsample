@@ -36,14 +36,18 @@ public class ItemManager {
 	 * uses retrofit API client to get items
 	 */
 	public List<Item> getItems() {
-		Call<List<Item>> itemsApiCall = itemApiClient.items();
+		Call<List<Item>> itemsApiCall = 
+				itemApiClient.items();
 		List<Item> items = null;
 		
 		try {
 			 items = itemsApiCall.execute().body();
+			 
 		} catch (IOException e) {
 			System.err.println("Error calling items API");
-		} 
+		}catch (Exception e) {
+			System.err.println("Error " + e.getMessage());
+		}
 		
 		return items;
 	}
