@@ -6,6 +6,7 @@ package io.pello.console.retrofitsample;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -28,8 +29,9 @@ public interface ItemApiClient {
     Call<Item> item (
         @Path("id") Long id);
 	
+	@Headers("Accept: application/json")
 	@POST("/web/admin/api/item/create/")
-    Call<String> create (Item item);
+    Call<String> create (@Body Item item);
 	
 	@PUT("/web/admin/api/item/update/")
     Call<String> update (Item item);
