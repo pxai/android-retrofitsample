@@ -99,14 +99,15 @@ public class ItemManager {
 	 * @param item
 	 * @return
 	 */
-	public String updateItem(Item item) {
-		Call<String> itemApiCall = itemApiClient.update(item);
-		String result = "";
+	public boolean updateItem(Item item) {
+		Call<Void> itemApiCall = itemApiClient.update(item);
+		boolean result = false;
 		
 		try {
-			result = itemApiCall.execute().body();
+			result = itemApiCall.execute().isSuccessful();
 		} catch (IOException e) {
 			System.err.println("Error calling item API");
+			e.printStackTrace();
 		} 
 		
 		return result;
@@ -117,14 +118,15 @@ public class ItemManager {
 	 * @param id
 	 * @return
 	 */
-	public String deleteItem(Long id) {
-		Call<String> itemApiCall = itemApiClient.delete(id);
-		String result = null;
+	public boolean deleteItem(Long id) {
+		Call<Void> itemApiCall = itemApiClient.delete(id);
+		boolean result = false;
 		
 		try {
-			result = itemApiCall.execute().body();
+			result = itemApiCall.execute().isSuccessful();
 		} catch (IOException e) {
 			System.err.println("Error calling item API");
+			e.printStackTrace();
 		} 
 		
 		return result;

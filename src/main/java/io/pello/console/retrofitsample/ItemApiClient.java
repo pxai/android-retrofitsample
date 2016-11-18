@@ -34,9 +34,9 @@ public interface ItemApiClient {
     Call<Void> create (@Body ItemPost item);
 	
 	@PUT("/2dam-project-multisite/web/app_dev.php/admin/api/item/update")
-    Call<String> update (Item item);
+    Call<Void> update (Item item);
 	
 	@DELETE("/admin/api/item/delete/{id}")
-    Call<String> delete (
+    Call<Void> delete (
         @Path("id") Long id);
 }
