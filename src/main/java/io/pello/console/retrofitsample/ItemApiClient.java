@@ -21,22 +21,22 @@ import retrofit2.http.Path;
 public interface ItemApiClient {
 	
 	@Headers("Accept: application/json")
-	@GET("/web/admin/api/item")
+	@GET("/2dam-project-multisite/web/app_dev.php/admin/api/item")
     Call<List<Item>> items ();
 	
 	@Headers("Accept: application/json")
-	@GET("/web/admin/api/item/detail/{id}")
+	@GET("/2dam-project-multisite/web/app_dev.php/admin/api/item/detail/{id}")
     Call<Item> item (
         @Path("id") Long id);
 	
 	@Headers("Accept: application/json")
-	@POST("/web/admin/api/item/create/")
-    Call<String> create (@Body Item item);
+	@POST("/2dam-project-multisite/web/app_dev.php/admin/api/item/create")
+    Call<Void> create (@Body ItemPost item);
 	
-	@PUT("/web/admin/api/item/update/")
+	@PUT("/2dam-project-multisite/web/app_dev.php/admin/api/item/update")
     Call<String> update (Item item);
 	
-	@DELETE("/web/admin/api/item/delete/{id}")
+	@DELETE("/admin/api/item/delete/{id}")
     Call<String> delete (
         @Path("id") Long id);
 }

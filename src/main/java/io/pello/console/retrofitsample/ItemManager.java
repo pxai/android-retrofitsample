@@ -45,8 +45,10 @@ public class ItemManager {
 			 
 		} catch (IOException e) {
 			System.err.println("Error calling items API");
+			e.printStackTrace();
 		}catch (Exception e) {
 			System.err.println("Error " + e.getMessage());
+			e.printStackTrace();
 		}
 		
 		return items;
@@ -67,6 +69,7 @@ public class ItemManager {
 			 item = itemApiCall.execute().body();
 		} catch (IOException e) {
 			System.err.println("Error calling item API");
+			e.printStackTrace();
 		} 
 		
 		return item;
@@ -77,14 +80,15 @@ public class ItemManager {
 	 * @param item
 	 * @return
 	 */
-	public String createItem(Item item) {
-		Call<String> itemApiCall = itemApiClient.create(item);
-		String result = "";
+	public boolean createItem(Item item) {
+		Call<Void> itemApiCall = itemApiClient.create(new ItemPost(item));//.create(item);
+		boolean result = false;
 		
 		try {
-			result = itemApiCall.execute().body();
+			result = itemApiCall.execute().isSuccessful();
 		} catch (IOException e) {
 			System.err.println("Error calling item API");
+			e.printStackTrace();
 		} 
 		
 		return result;
