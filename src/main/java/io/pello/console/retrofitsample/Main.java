@@ -7,8 +7,8 @@ public class Main {
 	
 	public void start () {
 		// 
-		//ItemManager itemManager = new ItemManager("http://bizgen.co/");
-		ItemManager itemManager = new ItemManager("http://localhost/");
+		ItemManager itemManager = new ItemManager("http://bizgen.co/");
+		//ItemManager itemManager = new ItemManager("http://localhost/");
     	Scanner reader = new Scanner(System.in);
     	String option = "";
     	String name = "";
